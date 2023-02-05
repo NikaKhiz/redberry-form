@@ -6,7 +6,7 @@ import "./index.css";
 
 const Welcome = () => {
   return (
-    <div className="container">
+    <div className="welcomeCont">
       <StyledHeader>
         <StyledImgCont>
           <StyledImg src={logo} alt="RDB logo" />

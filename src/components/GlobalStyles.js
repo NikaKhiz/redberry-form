@@ -12,6 +12,8 @@ export const GlobalStyles = createGlobalStyle`${css`
     --clr-neutral-gray: #00000099;
     --clr-dark-gray: #2e2e2e;
     --clr-light-gray: #909090;
+    --clr-lighter-gray: #BCBCBC;
+    --clr-veryLight-gray: #f8f8f8;
     // fonts
     --fw-primary: 400;
     --fw-bold: 700;
@@ -23,6 +25,7 @@ export const GlobalStyles = createGlobalStyle`${css`
   }
   body {
     font-family: HelveticaNeue;
+    font-size: 16px;
   }
   *,
   *::after,
@@ -40,6 +43,92 @@ export const GlobalStyles = createGlobalStyle`${css`
     justify-content: center;
     > * {
       flex: 100%;
+    }
+    .resumeCont {
+      flex: 70%;
+    }
+  }
+  .fieldsCont {
+    display: flex;
+    gap: 50px;
+    padding: 50px 40px;
+    background: var(--clr-veryLight-gray);
+    .fields {
+      width: 100%;
+      padding: 0 60px;
+      .fieldsHeading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--clr-off-black);
+      }
+      form {
+        width: 100%;
+        height: 100%;
+        padding: 60px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .groupsCont{
+          display:flex;
+          flex-direction: column;
+          gap:30px;
+          .formGroup {
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+            > * {
+              flex: 100%;
+            }
+            .formControl {
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+              label {
+                font-size: 16px;
+                color: var(--clr-primary-black);
+                font-weight: var(--fw-neutral);
+              }
+              span{
+                font-size: 14px;
+                color: var(--clr-dark-gray);
+                font-weight: 300;
+              }
+              input,
+              textarea {
+                font-size: 16px;
+                width: 100%;
+                padding: 10px ;
+                border: 1px solid var(--clr-lighter-gray);
+                border-radius: 5px;
+                color:var(--clr-primary-black)
+                resize: none;
+                &::placeholder {
+                  font-weight: 400;
+                  color: var(--clr-neutral-gray);
+                }
+                &:focus{
+                  outline: none;
+                }
+              }
+            }
+          }
+      }
+        .formButtons {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          button {
+            background-color: var(--clr-primary-violet);
+            border:none;
+            padding:15px 35px;
+            border-radius: 5px;
+            color:var(--clr-primary-white);
+            cursor:pointer;
+          }
+        }
+      }
     }
   }
 `}`;

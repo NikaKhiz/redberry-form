@@ -1,4 +1,4 @@
-.container {
+.welcomeCont {
   width: 100%;
   height: 100%;
   position: relative;
@@ -7,7 +7,7 @@
   background-repeat: no-repeat;
   background-position: right top;
 }
-.container button {
+.welcomeCont button {
   position: absolute;
   left: 50%;
   top: 50%;
