@@ -1,6 +1,8 @@
 import React from "react";
+import styled from "styled-components";
 import Resume from "../resume";
 import reset from "../../assets/images/reset.png";
+
 const PrivateInfo = () => {
   return (
     <>
@@ -10,7 +12,7 @@ const PrivateInfo = () => {
         </div>
         <div className="fields">
           <div className="fieldsHeading">
-            <h1>private info</h1>
+            <h1>პირადი ინფო</h1>
             <p className="pages">1/3</p>
           </div>
           <form action="">
@@ -27,28 +29,35 @@ const PrivateInfo = () => {
                   <span className="hint">მინიმუმ 2 ასო, ქართული ასოები</span>
                 </div>
                 <div className="formControl">
-                  <label htmlFor="lastName">სახელი</label>
+                  <label htmlFor="surname">გვარი</label>
                   <input
                     type="text"
                     placeholder="მუმლაძე"
-                    id="lastName"
-                    name="lastName"
+                    id="surname"
+                    name="surname"
                   />
                   <span className="hint">მინიმუმ 2 ასო, ქართული ასოები</span>
                 </div>
               </div>
               <div className="formGroup">
                 <div className="formControl">
-                  <label htmlFor="privatePhoto">პირადი ფოტოს ატვირთვა</label>
-                  <input type="file" name="privatePhoto" id="privatePhoto" />
+                  <label htmlFor="image">
+                    პირადი ფოტოს ატვირთვა <StyledLabel>ატვირთვა</StyledLabel>
+                  </label>
+                  <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    style={{ display: "none" }}
+                  />
                 </div>
               </div>
               <div className="formGroup">
                 <div className="formControl">
-                  <label htmlFor="aboutMe">ჩემ შესახებ (არასავალდებულო)</label>
+                  <label htmlFor="about_me">ჩემ შესახებ (არასავალდებულო)</label>
                   <textarea
-                    name="aboutMe"
-                    id="aboutMe"
+                    name="about_me"
+                    id="about_me"
                     cols="30"
                     rows="5"
                     placeholder="ზოგადი ინფო შენ შესახებ"
@@ -71,11 +80,11 @@ const PrivateInfo = () => {
               </div>
               <div className="formGroup">
                 <div className="formControl">
-                  <label htmlFor="mobile">მობილურის ნომერი</label>
+                  <label htmlFor="phone_number">მობილურის ნომერი</label>
                   <input
                     type="tel"
-                    name="mobile"
-                    id="mobile"
+                    name="phone_number"
+                    id="phone_number"
                     placeholder="+995 551 12 34 56"
                   />
                   <span className="hint">
@@ -95,5 +104,15 @@ const PrivateInfo = () => {
     </>
   );
 };
+const StyledLabel = styled.p`
+  cursor: pointer;
+  display: inline-block;
+  background: var(--clr-primary-blue);
+  padding: 5px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: var(--clr-primary-white);
+  margin-left: 15px;
+`;
 
 export default PrivateInfo;

@@ -4,9 +4,9 @@ import Welcome from "./welcome";
 import PrivateInfo from "./privateinfo";
 import Experience from "./experience";
 import Education from "./education";
-import ResumeFinal from "./sentresume";
+import ResumeFinal from "./resumefinal";
 const ApplicationForm = () => {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(3);
   return (
     <>
       <div className="wrapper">

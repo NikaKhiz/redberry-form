@@ -1,7 +1,9 @@
 const ResumeFinal = () => {
   return (
     <>
-      <h1>final output</h1>
+      <div className="resumeFinal">
+        <h1>final resume</h1>
+      </div>
     </>
   );
 };

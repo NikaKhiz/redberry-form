@@ -12,7 +12,7 @@ export const GlobalStyles = createGlobalStyle`${css`
     --clr-neutral-gray: #00000099;
     --clr-dark-gray: #2e2e2e;
     --clr-light-gray: #909090;
-    --clr-lighter-gray: #BCBCBC;
+    --clr-lighter-gray: #bcbcbc;
     --clr-veryLight-gray: #f8f8f8;
     // fonts
     --fw-primary: 400;
@@ -70,10 +70,10 @@ export const GlobalStyles = createGlobalStyle`${css`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        .groupsCont{
-          display:flex;
+        .groupsCont {
+          display: flex;
           flex-direction: column;
-          gap:30px;
+          gap: 30px;
           .formGroup {
             display: flex;
             justify-content: space-between;
@@ -90,7 +90,7 @@ export const GlobalStyles = createGlobalStyle`${css`
                 color: var(--clr-primary-black);
                 font-weight: var(--fw-neutral);
               }
-              span{
+              span {
                 font-size: 14px;
                 color: var(--clr-dark-gray);
                 font-weight: 300;
@@ -99,33 +99,33 @@ export const GlobalStyles = createGlobalStyle`${css`
               textarea {
                 font-size: 16px;
                 width: 100%;
-                padding: 10px ;
+                padding: 10px;
                 border: 1px solid var(--clr-lighter-gray);
                 border-radius: 5px;
-                color:var(--clr-primary-black)
+                color: var(--clr-primary-black);
                 resize: none;
                 &::placeholder {
                   font-weight: 400;
                   color: var(--clr-neutral-gray);
                 }
-                &:focus{
+                &:focus {
                   outline: none;
                 }
               }
             }
           }
-      }
+        }
         .formButtons {
           display: flex;
           align-items: center;
           justify-content: space-between;
           button {
             background-color: var(--clr-primary-violet);
-            border:none;
-            padding:15px 35px;
+            border: none;
+            padding: 15px 35px;
             border-radius: 5px;
-            color:var(--clr-primary-white);
-            cursor:pointer;
+            color: var(--clr-primary-white);
+            cursor: pointer;
           }
         }
       }
