@@ -1,6 +1,6 @@
-import { createGlobalStyle, css } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import HelveticaNeue from "../assets/fonts/HelveticaNeue.ttc";
-export const GlobalStyles = createGlobalStyle`${css`
+export const GlobalStyles = createGlobalStyle`
   :root {
     // colors
     --clr-primary-blue: #0e80bf;
@@ -118,7 +118,8 @@ export const GlobalStyles = createGlobalStyle`${css`
         .formButtons {
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: ${(props) =>
+            props.page > 1 ? "space-between" : "flex-end"};
           button {
             background-color: var(--clr-primary-violet);
             border: none;
@@ -130,5 +131,10 @@ export const GlobalStyles = createGlobalStyle`${css`
         }
       }
     }
+    .resetBtn {
+      border: none;
+      cursor: pointer;
+      background: transparent;
+    }
   }
-`}`;
+`;

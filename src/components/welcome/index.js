@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { useGlobalContext } from "../../context";
 import logo from "../../assets/images/logo.png";
 import agencyRing from "../../assets/images/agencyRing.png";
 import "./index.css";
 
 const Welcome = () => {
+  const { nextPage } = useGlobalContext();
   return (
     <div className="welcomeCont">
       <StyledHeader>
@@ -12,7 +14,7 @@ const Welcome = () => {
           <StyledImg src={logo} alt="RDB logo" />
         </StyledImgCont>
       </StyledHeader>
-      <StyledButton>რეზიუმეს დამატება</StyledButton>
+      <StyledButton onClick={nextPage}>რეზიუმეს დამატება</StyledButton>
     </div>
   );
 };
