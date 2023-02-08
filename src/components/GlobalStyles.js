@@ -70,6 +70,8 @@ export const GlobalStyles = createGlobalStyle`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        gap:30px;
+        overflow-y: auto;
         .groupsCont {
           display: flex;
           flex-direction: column;

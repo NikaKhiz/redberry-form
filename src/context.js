@@ -4,6 +4,57 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [page, setPage] = useState(0);
+  const [privateInfo, setPrivateInfo] = useState([
+    {
+      name: "",
+      surname: "",
+      image: "",
+      aboutMe: "",
+      email: "",
+      phone: "",
+    },
+  ]);
+  const [experience, setExperience] = useState([
+    {
+      position: "",
+      employer: "",
+      startDate: "",
+      dueDate: "",
+      description: "",
+    },
+  ]);
+  const [education, setEducation] = useState([
+    {
+      indsitute: "",
+      degree: "",
+      dueDate: "",
+      description: "",
+    },
+  ]);
+  const addExperience = () => {
+    setExperience([
+      ...experience,
+      {
+        id: experience.length + 1,
+        indsitute: "",
+        degree: "",
+        dueDate: "",
+        description: "",
+      },
+    ]);
+  };
+  const addEducation = () => {
+    setEducation([
+      ...education,
+      {
+        id: education.length + 1,
+        indsitute: "",
+        degree: "",
+        dueDate: "",
+        description: "",
+      },
+    ]);
+  };
   const nextPage = () => {
     setPage((prevState) => {
       return prevState + 1;
@@ -21,6 +72,7 @@ const AppProvider = ({ children }) => {
     e.preventDefault();
     setPage(4);
   };
+
   return (
     <AppContext.Provider
       value={{
@@ -29,6 +81,14 @@ const AppProvider = ({ children }) => {
         prevPage,
         handleSubmit,
         resetForm,
+        privateInfo,
+        setPrivateInfo,
+        education,
+        setEducation,
+        experience,
+        setExperience,
+        addExperience,
+        addEducation,
       }}
     >
       {children}
