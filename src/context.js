@@ -3,9 +3,19 @@ import React, { useState, useContext } from "react";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  
-  const [page, setPage] = useState(0);
   const sessionStorage = window.sessionStorage;
+  const [shouldReplace, setShouldReplace] = useState(false);
+
+  const getPageInfo = () => {
+    const pageInfo = parseInt(sessionStorage.getItem("page"));
+    if (pageInfo) {
+      return pageInfo;
+    } else {
+      return 0;
+    }
+  };
+  const [page, setPage] = useState(getPageInfo());
+
   const setPersonalInfo = () => {
     const personalInfo = sessionStorage.getItem("personal");
     if (personalInfo) {
@@ -23,15 +33,25 @@ const AppProvider = ({ children }) => {
     }
   };
   const [privateInfo, setPrivateInfo] = useState(setPersonalInfo());
-  const [experiences, setExperiences] = useState([
-    {
-      position: "",
-      employer: "",
-      start_date: "",
-      due_date: "",
-      description: "",
-    },
-  ]);
+
+  const getSavedExperiences = () => {
+    const savedExperiences = sessionStorage.getItem("experiences");
+    if (savedExperiences) {
+      const data = JSON.parse(savedExperiences);
+      return data;
+    } else {
+      return [
+        {
+          position: "",
+          employer: "",
+          start_date: "",
+          due_date: "",
+          description: "",
+        },
+      ];
+    }
+  };
+  const [experiences, setExperiences] = useState(getSavedExperiences());
   const [experience, setExperience] = useState({
     index: 0,
     position: "",
@@ -40,14 +60,24 @@ const AppProvider = ({ children }) => {
     due_date: "",
     description: "",
   });
-  const [educations, setEducations] = useState([
-    {
-      institute: "",
-      degree: "",
-      due_date: "",
-      description: "",
-    },
-  ]);
+
+  const getSavedEducations = () => {
+    const savedEducations = sessionStorage.getItem("educations");
+    if (savedEducations) {
+      const data = JSON.parse(savedEducations);
+      return data;
+    } else {
+      return [
+        {
+          institute: "",
+          degree: "",
+          due_date: "",
+          description: "",
+        },
+      ];
+    }
+  };
+  const [educations, setEducations] = useState(getSavedEducations());
   const [education, setEducation] = useState({
     index: 0,
     institute: "",
@@ -157,14 +187,33 @@ const AppProvider = ({ children }) => {
       email: "",
       phone_number: "",
     });
-    setExperiences({
+    setExperiences([
+      {
+        position: "",
+        employer: "",
+        start_date: "",
+        due_date: "",
+        description: "",
+      },
+    ]);
+    setExperience({
+      index: 0,
       position: "",
       employer: "",
       start_date: "",
       due_date: "",
       description: "",
     });
+    setEducations([
+      {
+        institute: "",
+        degree: "",
+        due_date: "",
+        description: "",
+      },
+    ]);
     setEducation({
+      index: 0,
       institute: "",
       degree: "",
       due_date: "",
@@ -185,6 +234,7 @@ const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         page,
+        setPage,
         nextPage,
         prevPage,
         handleSubmit,
@@ -204,6 +254,8 @@ const AppProvider = ({ children }) => {
         degrees,
         getDegrees,
         sessionStorage,
+        shouldReplace,
+        setShouldReplace,
       }}
     >
       {children}

@@ -9,15 +9,21 @@ const ExperienceFields = () => {
     experiences,
     setExperiences,
     addExperiences,
+    shouldReplace,
+    setShouldReplace,
   } = useGlobalContext();
   const handleChange = (e, index) => {
     const name = e.target.name;
     const value = e.target.value;
-    setExperience({ ...experience, [name]: value, index: index });
+    setExperience({ ...experiences[index], [name]: value, index: index });
+    setShouldReplace(true);
   };
   useEffect(() => {
-    experiences.splice(experience.index, 1, experience);
+    if (shouldReplace) {
+      experiences.splice(experience.index, 1, experience);
+    }
     setExperiences([...experiences]);
+    sessionStorage.setItem("experiences", JSON.stringify(experiences));
   }, [experience]);
   return (
     <>

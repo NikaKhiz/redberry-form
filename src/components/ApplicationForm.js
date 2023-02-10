@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useGlobalContext } from "../context";
 import Welcome from "./welcome";
 import PrivateInfo from "./privateinfo";
@@ -8,8 +8,12 @@ import Resume from "./resume";
 import reset from "../assets/images/reset.png";
 
 const ApplicationForm = () => {
-  const { page, resetForm, nextPage, prevPage, handleSubmit } =
+  const { page, resetForm, nextPage, prevPage, handleSubmit, sessionStorage } =
     useGlobalContext();
+
+  useEffect(() => {
+    sessionStorage.setItem("page", JSON.stringify(page));
+  }, [page]);
 
   if (page === 0) {
     return (

@@ -10,20 +10,27 @@ const EducationFields = () => {
     addEducations,
     degrees,
     getDegrees,
+    shouldReplace,
+    setShouldReplace,
   } = useGlobalContext();
   useEffect(() => {
     getDegrees();
   }, [educations]);
-  
+
   const handleChange = (e, index) => {
     const name = e.target.name;
     const value = e.target.value;
-    setEducation({ ...education, [name]: value, index: index });
+    setEducation({ ...educations[index], [name]: value, index: index });
+    setShouldReplace(true);
   };
   useEffect(() => {
-    educations.splice(education.index, 1, education);
+    if (shouldReplace) {
+      educations.splice(education.index, 1, education);
+    }
     setEducations([...educations]);
+    sessionStorage.setItem("educations", JSON.stringify(educations));
   }, [education]);
+
   return (
     <>
       {educations.map((item, index) => {
