@@ -1,4 +1,9 @@
+import React from "react";
+import { useGlobalContext } from "../../context";
+
 const ResumeFinal = () => {
+  const { resetForm } = useGlobalContext();
+  
   return (
     <>
       <div className="resumeFinal">

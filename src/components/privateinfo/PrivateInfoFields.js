@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../../context";
 
 const PrivateInfoFields = () => {
-  const { privateInfo, setPrivateInfo } = useGlobalContext();
+  const { privateInfo, setPrivateInfo, sessionStorage } = useGlobalContext();
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
+    if (name === "image") {
+      const image = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.addEventListener("load", () => {
+        setPrivateInfo({ ...privateInfo, image: reader.result });
+      });
+    }
     setPrivateInfo({ ...privateInfo, [name]: value });
   };
+  useEffect(() => {
+    sessionStorage.setItem("personal", JSON.stringify(privateInfo));
+  });
   return (
     <>
       <div className="groupsCont">
@@ -48,7 +59,6 @@ const PrivateInfoFields = () => {
               name="image"
               id="image"
               style={{ display: "none" }}
-              value={privateInfo.image}
               onChange={handleChange}
             />
           </div>

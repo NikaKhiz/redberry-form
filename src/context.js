@@ -3,30 +3,71 @@ import React, { useState, useContext } from "react";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
+  
   const [page, setPage] = useState(0);
-  const [privateInfo, setPrivateInfo] = useState({
-    name: "",
-    surname: "",
-    image: "",
-    about_me: "",
-    email: "",
-    phone_number: "",
-  });
+  const sessionStorage = window.sessionStorage;
+  const setPersonalInfo = () => {
+    const personalInfo = sessionStorage.getItem("personal");
+    if (personalInfo) {
+      const data = JSON.parse(personalInfo);
+      return data;
+    } else {
+      return {
+        name: "",
+        surname: "",
+        image: "",
+        about_me: "",
+        email: "",
+        phone_number: "",
+      };
+    }
+  };
+  const [privateInfo, setPrivateInfo] = useState(setPersonalInfo());
+  const [experiences, setExperiences] = useState([
+    {
+      position: "",
+      employer: "",
+      start_date: "",
+      due_date: "",
+      description: "",
+    },
+  ]);
   const [experience, setExperience] = useState({
+    index: 0,
     position: "",
     employer: "",
     start_date: "",
     due_date: "",
     description: "",
   });
+  const [educations, setEducations] = useState([
+    {
+      institute: "",
+      degree: "",
+      due_date: "",
+      description: "",
+    },
+  ]);
   const [education, setEducation] = useState({
+    index: 0,
     institute: "",
     degree: "",
-    dueDate: "",
+    due_date: "",
     description: "",
   });
-  const addExperience = () => {
+  const addExperiences = () => {
+    setExperiences([
+      ...experiences,
+      {
+        position: "",
+        employer: "",
+        start_date: "",
+        due_date: "",
+        description: "",
+      },
+    ]);
     setExperience({
+      index: experience.index + 1,
       position: "",
       employer: "",
       start_date: "",
@@ -34,8 +75,18 @@ const AppProvider = ({ children }) => {
       description: "",
     });
   };
-  const addEducation = () => {
+  const addEducations = () => {
+    setEducations([
+      ...educations,
+      {
+        institute: "",
+        degree: "",
+        due_date: "",
+        description: "",
+      },
+    ]);
     setEducation({
+      index: education.index + 1,
       institute: "",
       degree: "",
       due_date: "",
@@ -57,27 +108,68 @@ const AppProvider = ({ children }) => {
       name: "",
       surname: "",
       image: "",
-      aboutMe: "",
+      about_me: "",
       email: "",
-      phone: "",
+      phone_number: "",
     });
+    setExperiences([
+      {
+        position: "",
+        employer: "",
+        start_date: "",
+        due_date: "",
+        description: "",
+      },
+    ]);
     setExperience({
+      index: 0,
       position: "",
       employer: "",
-      startDate: "",
-      dueDate: "",
+      start_date: "",
+      due_date: "",
+      description: "",
+    });
+    setEducations([
+      {
+        institute: "",
+        degree: "",
+        due_date: "",
+        description: "",
+      },
+    ]);
+    setEducation({
+      index: 0,
+      institute: "",
+      degree: "",
+      due_date: "",
+      description: "",
+    });
+
+    setPage(0);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setPrivateInfo({
+      name: "",
+      surname: "",
+      image: "",
+      about_me: "",
+      email: "",
+      phone_number: "",
+    });
+    setExperiences({
+      position: "",
+      employer: "",
+      start_date: "",
+      due_date: "",
       description: "",
     });
     setEducation({
       institute: "",
       degree: "",
-      dueDate: "",
+      due_date: "",
       description: "",
     });
-    setPage(0);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
     setPage(4);
   };
 
@@ -99,14 +191,19 @@ const AppProvider = ({ children }) => {
         resetForm,
         privateInfo,
         setPrivateInfo,
+        educations,
         education,
         setEducation,
+        setEducations,
+        experiences,
         experience,
         setExperience,
-        addExperience,
-        addEducation,
+        setExperiences,
+        addExperiences,
+        addEducations,
         degrees,
         getDegrees,
+        sessionStorage,
       }}
     >
       {children}
