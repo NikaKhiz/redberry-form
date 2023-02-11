@@ -1,6 +1,86 @@
-.resumeCont {
-  padding: 70px 80px 50px;
+.resume {
   display: flex;
   flex-direction: column;
+  gap: 25px;
+}
+.personal {
+  display: flex;
   justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--clr-lighter-gray);
+  max-width: 100%;
+}
+.personalInfo {
+  max-width: calc(100% - 200px);
+}
+.personalInfo,
+.experience,
+.education {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 16px;
+  font-weight: var(--fw-primary);
+  word-wrap: break-word;
+}
+.personalInfo h1 {
+  font-size: 35px;
+  font-weight: var(--fw-bold);
+  color: var(--clr-primary-red);
+}
+.heading {
+  color: var(--clr-primary-red);
+  font-weight: var(--fw-bold);
+  font-size: 18px;
+}
+.subheading {
+  color: var(--clr-off-black);
+  font-weight: var(--fw-neutral);
+}
+.personalInfo .contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--clr-off-black);
+}
+.personalInfo .contacts > * {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.experience .description,
+.education .description {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 20px;
+  line-height: 22px;
+  border-bottom: 1px solid var(--clr-lighter-gray);
+  color: var(--clr-primary-black);
+}
+.personalInfo .description {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  line-height: 22px;
+  color: var(--clr-primary-black);
+}
+.subheading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.subheading p:nth-child(1) {
+  color: var(--clr-off-black);
+}
+.subheading p:nth-child(2) {
+  color: var(--clr-lighter-gray);
+}
+.applicantImg > img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  display: block;
+  object-fit: cover;
 }

@@ -46,6 +46,12 @@ export const GlobalStyles = createGlobalStyle`
     }
     .resumeCont {
       flex: 70%;
+      padding: 70px 80px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 16px;
+      max-width:40%;
     }
   }
   .fieldsCont {

@@ -67,7 +67,9 @@ const ApplicationForm = () => {
             </form>
           </div>
         </div>
-        <Resume />
+        <div className="resumeCont">
+          <Resume />
+        </div>
       </div>
     </>
   );
