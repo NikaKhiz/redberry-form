@@ -7,6 +7,7 @@ export const GlobalStyles = createGlobalStyle`
     --clr-primary-violet: #6b40e3;
     --clr-primary-red: #e52f2f;
     --clr-primary-black: #000000;
+    --clr-primary-green:#98E37E;
     --clr-off-black: #1a1a1a;
     --clr-primary-white: #ffffff;
     --clr-neutral-gray: #00000099;
@@ -52,6 +53,7 @@ export const GlobalStyles = createGlobalStyle`
       justify-content: space-between;
       font-size: 16px;
       max-width:40%;
+      gap:30px
     }
   }
   .fieldsCont {
@@ -78,6 +80,7 @@ export const GlobalStyles = createGlobalStyle`
         justify-content: space-between;
         gap:30px;
         overflow-y: auto;
+        overflow-x: hidden;
         .groupsCont {
           display: flex;
           flex-direction: column;
@@ -93,6 +96,7 @@ export const GlobalStyles = createGlobalStyle`
               display: flex;
               flex-direction: column;
               gap: 10px;
+              position: relative;
               label {
                 font-size: 16px;
                 color: var(--clr-primary-black);
@@ -119,6 +123,43 @@ export const GlobalStyles = createGlobalStyle`
                 &:focus {
                   outline: none;
                 }
+              }
+              input.error,textarea.error {
+                border: 1px solid var(--clr-primary-red);
+              }
+              .warning{
+                width: 20px;
+                height: 20px;
+                position: absolute;
+                right: -10%;
+                top:50%;
+                transform: translate(-50%,-50%);
+                display: none;
+              }
+              input.error ~.warning {
+                display: block;
+              }
+              textarea.error ~.warning {
+                display: block;
+              }
+              input.success,textarea{
+                border: 1px solid var(--clr-primary-green);
+
+              }
+              textarea.success ~.ready {
+                display: block;
+              }
+              .ready{
+                width: 20px;
+                height: 20px;
+                position: absolute;
+                right: 0;
+                top:50%;
+                transform: translate(-50%,-50%);
+                display: none;
+              }
+              input.success ~.ready {
+                display: block;
               }
             }
           }

@@ -6,10 +6,17 @@ import Experience from "./experience";
 import Education from "./education";
 import Resume from "./resume";
 import reset from "../assets/images/reset.png";
+import ResumeFinal from "./resumefinal";
 
 const ApplicationForm = () => {
-  const { page, resetForm, nextPage, prevPage, handleSubmit, sessionStorage } =
-    useGlobalContext();
+  const {
+    page,
+    resetForm,
+    nextPage,
+    prevPage,
+    handleSubmit,
+    sessionStorage,
+  } = useGlobalContext();
 
   useEffect(() => {
     sessionStorage.setItem("page", JSON.stringify(page));
@@ -26,7 +33,7 @@ const ApplicationForm = () => {
     return (
       <>
         <div className="wrapper">
-          <Resume />
+          <ResumeFinal />
         </div>
       </>
     );
@@ -47,7 +54,7 @@ const ApplicationForm = () => {
               {page === 3 && <h1>განათლება</h1>}
               <p className="pages">{page}/3</p>
             </div>
-            <form action="" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
               {page === 1 && <PrivateInfo />}
               {page === 2 && <Experience />}
               {page === 3 && <Education />}

@@ -59,6 +59,12 @@
   border-bottom: 1px solid var(--clr-lighter-gray);
   color: var(--clr-primary-black);
 }
+.educations,
+.experiences {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
 .personalInfo .description {
   display: flex;
   flex-direction: column;

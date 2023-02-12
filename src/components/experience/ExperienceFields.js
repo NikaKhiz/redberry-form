@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../../context";
+import warning from "../../assets/images/warning.png";
+import success from "../../assets/images/ready.png";
 
 const ExperienceFields = () => {
   const {
@@ -11,10 +13,54 @@ const ExperienceFields = () => {
     addExperiences,
     shouldReplace,
     setShouldReplace,
+    experiencesError,
+    setExperiencesError,
   } = useGlobalContext();
+  const {
+    positionError,
+    employerError,
+    startError,
+    endError,
+    descriptionError,
+  } = experiencesError;
   const handleChange = (e, index) => {
     const name = e.target.name;
     const value = e.target.value;
+    if (name === "position") {
+      if (value.length >= 2) {
+        setExperiencesError({ ...experiencesError, positionError: false });
+      } else {
+        setExperiencesError({ ...experiencesError, positionError: true });
+      }
+    }
+    if (name === "employer") {
+      if (value.length >= 2) {
+        setExperiencesError({ ...experiencesError, employerError: false });
+      } else {
+        setExperiencesError({ ...experiencesError, employerError: true });
+      }
+    }
+    if (name === "start_date") {
+      if (value) {
+        setExperiencesError({ ...experiencesError, startError: false });
+      } else {
+        setExperiencesError({ ...experiencesError, startError: true });
+      }
+    }
+    if (name === "due_date") {
+      if (value) {
+        setExperiencesError({ ...experiencesError, endError: false });
+      } else {
+        setExperiencesError({ ...experiencesError, endError: true });
+      }
+    }
+    if (name === "description") {
+      if (value.length >= 2) {
+        setExperiencesError({ ...experiencesError, descriptionError: false });
+      } else {
+        setExperiencesError({ ...experiencesError, descriptionError: true });
+      }
+    }
     setExperience({ ...experiences[index], [name]: value, index: index });
     setShouldReplace(true);
   };
@@ -40,7 +86,14 @@ const ExperienceFields = () => {
                   name="position"
                   value={item.position}
                   onChange={(e) => handleChange(e, index)}
+                  className={positionError ? "error" : "success"}
                 />
+                <div className="warning">
+                  <img src={warning} alt="warning" />
+                </div>
+                <div className="ready">
+                  <img src={success} alt="warning" />
+                </div>
                 <span className="hint">მინიმუმ 2 სიმბოლო</span>
               </div>
             </div>
@@ -54,7 +107,14 @@ const ExperienceFields = () => {
                   name="employer"
                   value={item.employer}
                   onChange={(e) => handleChange(e, index)}
+                  className={employerError ? "error" : "success"}
                 />
+                <div className="warning">
+                  <img src={warning} alt="warning" />
+                </div>
+                <div className="ready">
+                  <img src={success} alt="warning" />
+                </div>
                 <span className="hint">მინიმუმ 2 სიმბოლო</span>
               </div>
             </div>
@@ -67,7 +127,14 @@ const ExperienceFields = () => {
                   id="start_date"
                   value={item.start_date}
                   onChange={(e) => handleChange(e, index)}
+                  className={startError ? "error" : "success"}
                 />
+                <div className="warning">
+                  <img src={warning} alt="warning" />
+                </div>
+                <div className="ready">
+                  <img src={success} alt="warning" />
+                </div>
               </div>
               <div className="formControl">
                 <label htmlFor="due_date">დამთავრების რიცხვი</label>
@@ -77,7 +144,14 @@ const ExperienceFields = () => {
                   id="due_date"
                   value={item.due_date}
                   onChange={(e) => handleChange(e, index)}
+                  className={endError ? "error" : "success"}
                 />
+                <div className="warning">
+                  <img src={warning} alt="warning" />
+                </div>
+                <div className="ready">
+                  <img src={success} alt="warning" />
+                </div>
               </div>
             </div>
             <div className="formGroup">
@@ -91,7 +165,14 @@ const ExperienceFields = () => {
                   placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
                   value={item.description}
                   onChange={(e) => handleChange(e, index)}
+                  className={descriptionError ? "error" : "success"}
                 ></textarea>
+                <div className="warning">
+                  <img src={warning} alt="warning" />
+                </div>
+                <div className="ready">
+                  <img src={success} alt="warning" />
+                </div>
               </div>
             </div>
             <StyledLine></StyledLine>

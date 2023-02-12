@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../../context";
+import dropdown from "../../assets/images/dropdown.png";
+import warning from "../../assets/images/warning.png";
+import success from "../../assets/images/ready.png";
+
 const EducationFields = () => {
   const {
     educations,
@@ -12,15 +16,52 @@ const EducationFields = () => {
     getDegrees,
     shouldReplace,
     setShouldReplace,
+    educationsError,
+    setEducationsError,
   } = useGlobalContext();
   useEffect(() => {
     getDegrees();
   }, [educations]);
-
-  const handleChange = (e, index) => {
+  const { instituteError, dueDateError, descrError } = educationsError;
+  const handleChange = (e, index, id) => {
     const name = e.target.name;
     const value = e.target.value;
-    setEducation({ ...educations[index], [name]: value, index: index });
+    id = 1;
+    if (name === "degree") {
+      for (let i = 0; i < degrees.length; i++) {
+        if (degrees[i].title === value) {
+          id = degrees[i].id;
+          break;
+        }
+      }
+    }
+    if (name === "institute") {
+      if (value.length >= 2) {
+        setEducationsError({ ...educationsError, instituteError: false });
+      } else {
+        setEducationsError({ ...educationsError, instituteError: true });
+      }
+    }
+    if (name === "description") {
+      if (value.length >= 2) {
+        setEducationsError({ ...educationsError, descrError: false });
+      } else {
+        setEducationsError({ ...educationsError, descrError: true });
+      }
+    }
+    if (name === "due_date") {
+      if (value) {
+        setEducationsError({ ...educationsError, dueDateError: false });
+      } else {
+        setEducationsError({ ...educationsError, dueDateError: true });
+      }
+    }
+    setEducation({
+      ...educations[index],
+      [name]: value,
+      index: index,
+      degree_id: id,
+    });
     setShouldReplace(true);
   };
   useEffect(() => {
@@ -46,27 +87,40 @@ const EducationFields = () => {
                   name="institute"
                   value={item.institute}
                   onChange={(e) => handleChange(e, index)}
+                  className={instituteError ? "error" : "success"}
                 />
+                <div className="warning">
+                  <img src={warning} alt="warning" />
+                </div>
+                <div className="ready">
+                  <img src={success} alt="warning" />
+                </div>
                 <span className="hint">მინიმუმ 2 სიმბოლო</span>
               </div>
             </div>
             <div className="formGroup">
               <div className="formControl">
                 <label htmlFor="degree">ხარისხი</label>
-                <select
-                  name="degree"
-                  id="degree"
-                  value={item.degree}
-                  onChange={(e) => handleChange(e, index)}
-                >
-                  {degrees.map((degree) => {
-                    return (
-                      <option value={degree.title} key={degree.id}>
-                        {degree.title}
-                      </option>
-                    );
-                  })}
-                </select>
+                <StyledDropdown>
+                  <StyledSelect
+                    name="degree"
+                    id="degree"
+                    value={item.degree}
+                    onChange={(e, id) => handleChange(e, index, id)}
+                  >
+                    {degrees.map((degree) => {
+                      return (
+                        <option value={degree.title} key={degree.id}>
+                          {degree.title}
+                        </option>
+                      );
+                    })}
+                  </StyledSelect>
+
+                  <StyledDropImg>
+                    <img src={dropdown} alt="" />
+                  </StyledDropImg>
+                </StyledDropdown>
               </div>
               <div className="formControl">
                 <label htmlFor="due_date">დამთავრების რიცხვი</label>
@@ -76,7 +130,14 @@ const EducationFields = () => {
                   id="due_date"
                   value={item.due_date}
                   onChange={(e) => handleChange(e, index)}
+                  className={dueDateError ? "error" : "success"}
                 />
+                <div className="warning">
+                  <img src={warning} alt="warning" />
+                </div>
+                <div className="ready">
+                  <img src={success} alt="warning" />
+                </div>
               </div>
             </div>
             <div className="formGroup">
@@ -90,7 +151,14 @@ const EducationFields = () => {
                   placeholder="განათლების აღწერა"
                   value={item.description}
                   onChange={(e) => handleChange(e, index)}
+                  className={descrError ? "error" : "success"}
                 ></textarea>
+                <div className="warning">
+                  <img src={warning} alt="warning" />
+                </div>
+                <div className="ready">
+                  <img src={success} alt="warning" />
+                </div>
               </div>
             </div>
             <StyledLine></StyledLine>
@@ -122,5 +190,31 @@ const StyledButton = styled.button`
   border-radius: 5px;
   max-width: max-content;
   cursor: pointer;
+`;
+const StyledDropdown = styled.div`
+  min-width: 250px;
+  height: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid #bcbcbc;
+  border-radius: 5px;
+`;
+const StyledSelect = styled.select`
+  border: none;
+  appearance: none;
+  outline: none;
+  background: none;
+  padding: 0 30px 0 15px;
+  color: #1a1a1a;
+`;
+const StyledDropImg = styled.div`
+  width: 50px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 export default EducationFields;

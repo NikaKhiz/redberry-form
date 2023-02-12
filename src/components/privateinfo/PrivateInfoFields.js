@@ -1,22 +1,91 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../../context";
+import warning from "../../assets/images/warning.png";
+import success from "../../assets/images/ready.png";
 
 const PrivateInfoFields = () => {
-  const { privateInfo, setPrivateInfo, sessionStorage } = useGlobalContext();
+  const {
+    privateInfo,
+    setPrivateInfo,
+    sessionStorage,
+    privateInfoError,
+    setPrivateInfoError,
+  } = useGlobalContext();
+  const {
+    nameError,
+    nameSuccess,
+    surnameSuccess,
+    surnameError,
+    imageSuccess,
+    imageError,
+    emailSuccess,
+    emailError,
+    phoneError,
+    phoneSuccess,
+  } = privateInfoError;
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
+
+    if (name === "name") {
+      const nameReg = /^([ა-ჰ]{2,12})$/.test(value);
+      if (nameReg) {
+        setPrivateInfoError({ ...privateInfoError, nameError: false });
+      } else {
+        setPrivateInfoError({ ...privateInfoError, nameError: true });
+      }
+    }
+    if (name === "surname") {
+      const nameReg = /^([ა-ჰ]{2,12})$/.test(value);
+      if (nameReg) {
+        setPrivateInfoError({ ...privateInfoError, surnameError: false });
+      } else {
+        setPrivateInfoError({ ...privateInfoError, surnameError: true });
+      }
+    }
+    if (name === "email") {
+      const mailReg = /^[a-zA-Z0-9.]+@redberry.ge$/.test(value);
+      if (mailReg) {
+        setPrivateInfoError({ ...privateInfoError, emailError: false });
+      } else {
+        setPrivateInfoError({ ...privateInfoError, emailError: true });
+      }
+    }
+    if (name === "phone_number") {
+      const phoneReg = /^(\+?995)?\s\d\d\d\s\d\d\s\d\d\s\d\d$/.test(value);
+      if (phoneReg) {
+        setPrivateInfoError({ ...privateInfoError, phoneError: false });
+      } else {
+        setPrivateInfoError({ ...privateInfoError, phoneError: true });
+      }
+    }
     if (name === "image") {
-      const image = e.target.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(image);
-      reader.addEventListener("load", () => {
-        setPrivateInfo({ ...privateInfo, image: reader.result });
+      // get a file and tarnsform it to base64 format
+      const file = e.target.files[0];
+      if (file) {
+        setPrivateInfoError({ ...privateInfoError, imageError: false });
+      } else {
+        setPrivateInfoError({ ...privateInfoError, imageError: true });
+      }
+      const toBase64 = (file) =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+        });
+      toBase64(file).then((data) => {
+        setPrivateInfo({
+          ...privateInfo,
+          imageBase: data,
+        });
       });
     }
     setPrivateInfo({ ...privateInfo, [name]: value });
   };
+
   useEffect(() => {
     sessionStorage.setItem("personal", JSON.stringify(privateInfo));
   });
@@ -33,7 +102,14 @@ const PrivateInfoFields = () => {
               name="name"
               value={privateInfo.name}
               onChange={handleChange}
+              className={nameError ? "error" : "success"}
             />
+            <div className="warning">
+              <img src={warning} alt="warning" />
+            </div>
+            <div className="ready">
+              <img src={success} alt="warning" />
+            </div>
             <span className="hint">მინიმუმ 2 ასო, ქართული ასოები</span>
           </div>
           <div className="formControl">
@@ -45,7 +121,14 @@ const PrivateInfoFields = () => {
               name="surname"
               value={privateInfo.surname}
               onChange={handleChange}
+              className={surnameError ? "error" : "success"}
             />
+            <div className="warning">
+              <img src={warning} alt="warning" />
+            </div>
+            <div className="ready">
+              <img src={success} alt="warning" />
+            </div>
             <span className="hint">მინიმუმ 2 ასო, ქართული ასოები</span>
           </div>
         </div>
@@ -58,9 +141,16 @@ const PrivateInfoFields = () => {
               type="file"
               name="image"
               id="image"
+              className={imageError ? "error" : "success"}
               style={{ display: "none" }}
               onChange={handleChange}
             />
+            <div className="warning">
+              <img src={warning} alt="warning" />
+            </div>
+            <div className="ready">
+              <img src={success} alt="warning" />
+            </div>
           </div>
         </div>
         <div className="formGroup">
@@ -87,7 +177,14 @@ const PrivateInfoFields = () => {
               placeholder="anzorr@redberry.ge"
               value={privateInfo.email}
               onChange={handleChange}
+              className={emailError ? "error" : "success"}
             />
+            <div className="warning">
+              <img src={warning} alt="warning" />
+            </div>
+            <div className="ready">
+              <img src={success} alt="warning" />
+            </div>
             <span className="hint">უნდა მთავრდებოდეს @redberry.ge-ით</span>
           </div>
         </div>
@@ -101,7 +198,14 @@ const PrivateInfoFields = () => {
               placeholder="+995 551 12 34 56"
               value={privateInfo.phone_number}
               onChange={handleChange}
+              className={phoneError ? "error" : "success"}
             />
+            <div className="warning">
+              <img src={warning} alt="warning" />
+            </div>
+            <div className="ready">
+              <img src={success} alt="warning" />
+            </div>
             <span className="hint">
               უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს
             </span>

@@ -4,17 +4,17 @@ import { useGlobalContext } from "../../context";
 import star from "../../assets/images/star.png";
 import mail from "../../assets/images/email.png";
 import phone from "../../assets/images/phone.png";
+
 const Resume = () => {
   const {
     educations,
     experiences,
-    privateInfo: { name, surname, image, about_me, email, phone_number },
+    privateInfo: { name, surname, imageBase, about_me, email, phone_number },
   } = useGlobalContext();
-  console.log(experiences);
   return (
     <>
       <div className="resume">
-        {name || surname || image || about_me || email || phone_number ? (
+        {name || surname || imageBase || about_me || email || phone_number ? (
           <div className="personal">
             <div className="personalInfo">
               <h1 className="heading">
@@ -41,9 +41,9 @@ const Resume = () => {
                 </div>
               )}
             </div>
-            {image && (
+            {imageBase && (
               <div className="applicantImg">
-                <img src={image} alt="" />
+                <img src={imageBase} alt="" />
               </div>
             )}
           </div>
@@ -55,17 +55,27 @@ const Resume = () => {
               item;
             return (
               <div className="experience" key={index}>
-                <p className="heading">გამოცდილება</p>
+                {position ||
+                employer ||
+                start_date ||
+                due_date ||
+                description ? (
+                  <p className="heading">გამოცდილება</p>
+                ) : null}
+
                 <div className="subheading">
                   <p>
-                    {item.position}, {employer}
+                    {position ? position + "," : null}{" "}
+                    {employer ? employer : null}
                   </p>
-                  <p>
-                    {item.start_date}
-                    {item.due_date}
+                  <p style={{ fontStyle: "italic" }}>
+                    {start_date ? start_date + " - " : null}
+                    {due_date ? due_date : null}
                   </p>
                 </div>
-                <div className="description">{item.description}</div>
+                {description ? (
+                  <div className="description">{description}</div>
+                ) : null}
               </div>
             );
           })}
@@ -75,14 +85,21 @@ const Resume = () => {
             const { institute, degree, due_date, description } = item;
             return (
               <div className="education" key={index}>
-                <p className="heading">განათლება </p>
+                {institute || degree || due_date || description ? (
+                  <p className="heading">განათლება </p>
+                ) : null}
                 <div className="subheading">
                   <p>
-                    {institute}, {degree}
+                    {institute ? institute + "," : null}{" "}
+                    {degree ? degree : null}
                   </p>
-                  <p>{due_date}</p>
+                  <p style={{ fontStyle: "italic" }}>
+                    {due_date ? due_date : null}
+                  </p>
                 </div>
-                <div className="description">{description}</div>
+                {description ? (
+                  <div className="description">{description}</div>
+                ) : null}
               </div>
             );
           })}
