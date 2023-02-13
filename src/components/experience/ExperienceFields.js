@@ -80,20 +80,22 @@ const ExperienceFields = () => {
             <div className="formGroup">
               <div className="formControl">
                 <label htmlFor="position">თანამდებობა</label>
-                <input
-                  type="text"
-                  placeholder="დეველოპერი, დიზაინერი, ა.შ."
-                  id="position"
-                  name="position"
-                  value={item.position}
-                  onChange={(e) => handleChange(e, index)}
-                  className={positionError ? "error" : "success"}
-                />
-                <div className="warning">
-                  <img src={warning} alt="warning" />
-                </div>
-                <div className="ready">
-                  <img src={success} alt="warning" />
+                <div className="input">
+                  <input
+                    type="text"
+                    placeholder="დეველოპერი, დიზაინერი, ა.შ."
+                    id="position"
+                    name="position"
+                    value={item.position}
+                    onChange={(e) => handleChange(e, index)}
+                    className={positionError ? "error" : "success"}
+                  />
+                  <div className="warning">
+                    <img src={warning} alt="warning" />
+                  </div>
+                  <div className="ready">
+                    <img src={success} alt="warning" />
+                  </div>
                 </div>
                 <span className="hint">მინიმუმ 2 სიმბოლო</span>
               </div>
@@ -101,20 +103,22 @@ const ExperienceFields = () => {
             <div className="formGroup">
               <div className="formControl">
                 <label htmlFor="employer">დამსაქმებელი</label>
-                <input
-                  type="text"
-                  placeholder="დამსაქმებელი"
-                  id="employer"
-                  name="employer"
-                  value={item.employer}
-                  onChange={(e) => handleChange(e, index)}
-                  className={employerError ? "error" : "success"}
-                />
-                <div className="warning">
-                  <img src={warning} alt="warning" />
-                </div>
-                <div className="ready">
-                  <img src={success} alt="warning" />
+                <div className="input">
+                  <input
+                    type="text"
+                    placeholder="დამსაქმებელი"
+                    id="employer"
+                    name="employer"
+                    value={item.employer}
+                    onChange={(e) => handleChange(e, index)}
+                    className={employerError ? "error" : "success"}
+                  />
+                  <div className="warning">
+                    <img src={warning} alt="warning" />
+                  </div>
+                  <div className="ready">
+                    <img src={success} alt="warning" />
+                  </div>
                 </div>
                 <span className="hint">მინიმუმ 2 სიმბოლო</span>
               </div>
@@ -122,57 +126,63 @@ const ExperienceFields = () => {
             <div className="formGroup">
               <div className="formControl">
                 <label htmlFor="start_date">დაწყების რიცხვი</label>
-                <input
-                  type="date"
-                  name="start_date"
-                  id="start_date"
-                  value={item.start_date}
-                  onChange={(e) => handleChange(e, index)}
-                  className={startError ? "error" : "success"}
-                />
-                <div className="warning">
-                  <img src={warning} alt="warning" />
-                </div>
-                <div className="ready">
-                  <img src={success} alt="warning" />
+                <div className="input">
+                  <input
+                    type="date"
+                    name="start_date"
+                    id="start_date"
+                    value={item.start_date}
+                    onChange={(e) => handleChange(e, index)}
+                    className={startError ? "error" : "success"}
+                  />
+                  <div className="warning">
+                    <img src={warning} alt="warning" />
+                  </div>
+                  <div className="ready">
+                    <img src={success} alt="warning" />
+                  </div>
                 </div>
               </div>
               <div className="formControl">
                 <label htmlFor="due_date">დამთავრების რიცხვი</label>
-                <input
-                  type="date"
-                  name="due_date"
-                  id="due_date"
-                  value={item.due_date}
-                  onChange={(e) => handleChange(e, index)}
-                  className={endError ? "error" : "success"}
-                />
-                <div className="warning">
-                  <img src={warning} alt="warning" />
-                </div>
-                <div className="ready">
-                  <img src={success} alt="warning" />
+                <div className="input">
+                  <input
+                    type="date"
+                    name="due_date"
+                    id="due_date"
+                    value={item.due_date}
+                    onChange={(e) => handleChange(e, index)}
+                    className={endError ? "error" : "success"}
+                  />
+                  <div className="warning">
+                    <img src={warning} alt="warning" />
+                  </div>
+                  <div className="ready">
+                    <img src={success} alt="warning" />
+                  </div>
                 </div>
               </div>
             </div>
             <div className="formGroup">
               <div className="formControl">
                 <label htmlFor="description">აღწერა</label>
-                <textarea
-                  name="description"
-                  id="description"
-                  cols="30"
-                  rows="5"
-                  placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
-                  value={item.description}
-                  onChange={(e) => handleChange(e, index)}
-                  className={descriptionError ? "error" : "success"}
-                ></textarea>
-                <div className="warning">
-                  <img src={warning} alt="warning" />
-                </div>
-                <div className="ready">
-                  <img src={success} alt="warning" />
+                <div className="input">
+                  <textarea
+                    name="description"
+                    id="description"
+                    cols="30"
+                    rows="5"
+                    placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
+                    value={item.description}
+                    onChange={(e) => handleChange(e, index)}
+                    className={descriptionError ? "error" : "success"}
+                  ></textarea>
+                  <div className="warning">
+                    <img src={warning} alt="warning" />
+                  </div>
+                  <div className="ready">
+                    <img src={success} alt="warning" />
+                  </div>
                 </div>
               </div>
             </div>

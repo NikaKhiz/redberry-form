@@ -127,19 +127,25 @@ export const GlobalStyles = createGlobalStyle`
               input.error,textarea.error {
                 border: 1px solid var(--clr-primary-red);
               }
+              .input{
+                display: flex;
+                align-items:center;
+                gap: 10px;
+              }
               .warning{
                 width: 20px;
                 height: 20px;
-                position: absolute;
-                right: -10%;
-                top:50%;
-                transform: translate(-50%,-50%);
-                display: none;
+                display:flex;
+                align-items: center;
+                justify-content: center;
+                img{
+                  display: none;
+                }
               }
-              input.error ~.warning {
+              input.error ~.warning img {
                 display: block;
               }
-              textarea.error ~.warning {
+              textarea.error ~.warning img{
                 display: block;
               }
               input.success,textarea.success{
@@ -152,7 +158,7 @@ export const GlobalStyles = createGlobalStyle`
                 width: 20px;
                 height: 20px;
                 position: absolute;
-                right: 0;
+                right: 5%;
                 top:50%;
                 transform: translate(-50%,-50%);
                 display: none;

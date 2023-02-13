@@ -85,61 +85,69 @@ const PrivateInfoFields = () => {
         <div className="formGroup">
           <div className="formControl">
             <label htmlFor="name">სახელი</label>
-            <input
-              type="text"
-              placeholder="ანზორ"
-              id="name"
-              name="name"
-              value={privateInfo.name}
-              onChange={handleChange}
-              className={nameError ? "error" : "success"}
-            />
-            <div className="warning">
-              <img src={warning} alt="warning" />
+            <div className="input">
+              <input
+                type="text"
+                placeholder="ანზორ"
+                id="name"
+                name="name"
+                value={privateInfo.name}
+                onChange={handleChange}
+                className={nameError ? "error" : "success"}
+              />
+              <div className="warning">
+                <img src={warning} alt="warning" />
+              </div>
+              <div className="ready">
+                <img src={success} alt="success" />
+              </div>
             </div>
-            <div className="ready">
-              <img src={success} alt="warning" />
-            </div>
+
             <span className="hint">მინიმუმ 2 ასო, ქართული ასოები</span>
           </div>
           <div className="formControl">
             <label htmlFor="surname">გვარი</label>
-            <input
-              type="text"
-              placeholder="მუმლაძე"
-              id="surname"
-              name="surname"
-              value={privateInfo.surname}
-              onChange={handleChange}
-              className={surnameError ? "error" : "success"}
-            />
-            <div className="warning">
-              <img src={warning} alt="warning" />
+            <div className="input">
+              <input
+                type="text"
+                placeholder="მუმლაძე"
+                id="surname"
+                name="surname"
+                value={privateInfo.surname}
+                onChange={handleChange}
+                className={surnameError ? "error" : "success"}
+              />
+              <div className="warning">
+                <img src={warning} alt="warning" />
+              </div>
+              <div className="ready">
+                <img src={success} alt="success" />
+              </div>
             </div>
-            <div className="ready">
-              <img src={success} alt="warning" />
-            </div>
+
             <span className="hint">მინიმუმ 2 ასო, ქართული ასოები</span>
           </div>
         </div>
         <div className="formGroup">
           <div className="formControl">
-            <label htmlFor="image">
-              პირადი ფოტოს ატვირთვა <StyledLabel>ატვირთვა</StyledLabel>
-            </label>
-            <input
-              type="file"
-              name="image"
-              id="image"
-              className={imageError ? "error" : "success"}
-              style={{ display: "none" }}
-              onChange={handleChange}
-            />
-            <div className="warning">
-              <img src={warning} alt="warning" />
-            </div>
-            <div className="ready">
-              <img src={success} alt="warning" />
+            <div className="input">
+              <label htmlFor="image">
+                პირადი ფოტოს ატვირთვა <StyledLabel>ატვირთვა</StyledLabel>
+              </label>
+              <input
+                type="file"
+                name="image"
+                id="image"
+                className={imageError ? "error" : "success"}
+                style={{ display: "none" }}
+                onChange={handleChange}
+              />
+              <div className="warning">
+                <img src={warning} alt="warning" />
+              </div>
+              <div className="ready">
+                <img src={success} alt="success" />
+              </div>
             </div>
           </div>
         </div>
@@ -160,42 +168,48 @@ const PrivateInfoFields = () => {
         <div className="formGroup">
           <div className="formControl">
             <label htmlFor="email">ელ.ფოსტა</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="anzorr@redberry.ge"
-              value={privateInfo.email}
-              onChange={handleChange}
-              className={emailError ? "error" : "success"}
-            />
-            <div className="warning">
-              <img src={warning} alt="warning" />
+            <div className="input">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="anzorr@redberry.ge"
+                value={privateInfo.email}
+                onChange={handleChange}
+                className={emailError ? "error" : "success"}
+              />
+              <div className="warning">
+                <img src={warning} alt="warning" />
+              </div>
+              <div className="ready">
+                <img src={success} alt="success" />
+              </div>
             </div>
-            <div className="ready">
-              <img src={success} alt="warning" />
-            </div>
+
             <span className="hint">უნდა მთავრდებოდეს @redberry.ge-ით</span>
           </div>
         </div>
         <div className="formGroup">
           <div className="formControl">
             <label htmlFor="phone_number">მობილურის ნომერი</label>
-            <input
-              type="tel"
-              name="phone_number"
-              id="phone_number"
-              placeholder="+995 551 12 34 56"
-              value={privateInfo.phone_number}
-              onChange={handleChange}
-              className={phoneError ? "error" : "success"}
-            />
-            <div className="warning">
-              <img src={warning} alt="warning" />
+            <div className="input">
+              <input
+                type="tel"
+                name="phone_number"
+                id="phone_number"
+                placeholder="+995 551 12 34 56"
+                value={privateInfo.phone_number}
+                onChange={handleChange}
+                className={phoneError ? "error" : "success"}
+              />
+              <div className="warning">
+                <img src={warning} alt="warning" />
+              </div>
+              <div className="ready">
+                <img src={success} alt="success" />
+              </div>
             </div>
-            <div className="ready">
-              <img src={success} alt="warning" />
-            </div>
+
             <span className="hint">
               უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს
             </span>

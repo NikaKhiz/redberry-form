@@ -23,7 +23,7 @@ const ResumeFinal = () => {
     <>
       <FinalResumeGlobal modal={modal} />
       <div className="finalResumeCont">
-        <div>
+        <div className="reset">
           <button type="button" onClick={resetForm} className="resetBtn">
             <img src={reset} alt="" />
           </button>

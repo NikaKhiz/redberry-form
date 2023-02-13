@@ -3,11 +3,13 @@ const FinalResumeGlobal = createGlobalStyle`${css`
   .finalResumeCont {
     display: flex;
     justify-content: space-between;
+    box-sizing: content-box;
     padding: 60px;
     .finalResume {
       border: 1px solid var(--clr-off-black);
       padding: 70px;
       max-width: 800px;
+      min-width: 600px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -101,6 +103,18 @@ const FinalResumeGlobal = createGlobalStyle`${css`
           right: 10px;
           top: 10px;
         }
+      }
+    }
+    .reset {
+      height: 50px;
+      width: 50px;
+      padding: 5px;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      .resetBtn {
+        background: none;
+        border: none;
+        cursor: pointer;
       }
     }
   }

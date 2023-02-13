@@ -81,20 +81,22 @@ const EducationFields = () => {
             <div className="formGroup">
               <div className="formControl">
                 <label htmlFor="institute">სასწავლებელი</label>
-                <input
-                  type="text"
-                  placeholder="სასწავლებელი"
-                  id="institute"
-                  name="institute"
-                  value={item.institute}
-                  onChange={(e) => handleChange(e, index)}
-                  className={instituteError ? "error" : "success"}
-                />
-                <div className="warning">
-                  <img src={warning} alt="warning" />
-                </div>
-                <div className="ready">
-                  <img src={success} alt="warning" />
+                <div className="input">
+                  <input
+                    type="text"
+                    placeholder="სასწავლებელი"
+                    id="institute"
+                    name="institute"
+                    value={item.institute}
+                    onChange={(e) => handleChange(e, index)}
+                    className={instituteError ? "error" : "success"}
+                  />
+                  <div className="warning">
+                    <img src={warning} alt="warning" />
+                  </div>
+                  <div className="ready">
+                    <img src={success} alt="warning" />
+                  </div>
                 </div>
                 <span className="hint">მინიმუმ 2 სიმბოლო</span>
               </div>
@@ -125,40 +127,44 @@ const EducationFields = () => {
               </div>
               <div className="formControl">
                 <label htmlFor="due_date">დამთავრების რიცხვი</label>
-                <input
-                  type="date"
-                  name="due_date"
-                  id="due_date"
-                  value={item.due_date}
-                  onChange={(e) => handleChange(e, index)}
-                  className={dueDateError ? "error" : "success"}
-                />
-                <div className="warning">
-                  <img src={warning} alt="warning" />
-                </div>
-                <div className="ready">
-                  <img src={success} alt="warning" />
+                <div className="input">
+                  <input
+                    type="date"
+                    name="due_date"
+                    id="due_date"
+                    value={item.due_date}
+                    onChange={(e) => handleChange(e, index)}
+                    className={dueDateError ? "error" : "success"}
+                  />
+                  <div className="warning">
+                    <img src={warning} alt="warning" />
+                  </div>
+                  <div className="ready">
+                    <img src={success} alt="warning" />
+                  </div>
                 </div>
               </div>
             </div>
             <div className="formGroup">
               <div className="formControl">
                 <label htmlFor="description">აღწერა</label>
-                <textarea
-                  name="description"
-                  id="description"
-                  cols="30"
-                  rows="5"
-                  placeholder="განათლების აღწერა"
-                  value={item.description}
-                  onChange={(e) => handleChange(e, index)}
-                  className={descrError ? "error" : "success"}
-                ></textarea>
-                <div className="warning">
-                  <img src={warning} alt="warning" />
-                </div>
-                <div className="ready">
-                  <img src={success} alt="warning" />
+                <div className="input">
+                  <textarea
+                    name="description"
+                    id="description"
+                    cols="30"
+                    rows="5"
+                    placeholder="განათლების აღწერა"
+                    value={item.description}
+                    onChange={(e) => handleChange(e, index)}
+                    className={descrError ? "error" : "success"}
+                  ></textarea>
+                  <div className="warning">
+                    <img src={warning} alt="warning" />
+                  </div>
+                  <div className="ready">
+                    <img src={success} alt="warning" />
+                  </div>
                 </div>
               </div>
             </div>
