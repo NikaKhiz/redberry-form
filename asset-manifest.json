@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/redberry-form/static/css/main.ff3996a3.css",
+    "main.js": "/redberry-form/static/js/main.f09fb8fc.js",
+    "static/media/background.png": "/redberry-form/static/media/background.76b4a680fe2f4b677c98.png",
+    "static/media/HelveticaNeue.ttc": "/redberry-form/static/media/HelveticaNeue.67d426c3bd180e2ea838.ttc",
+    "static/media/agencyRing.png": "/redberry-form/static/media/agencyRing.065c53f5e3d5d6fd73f9.png",
+    "index.html": "/redberry-form/index.html",
+    "main.ff3996a3.css.map": "/redberry-form/static/css/main.ff3996a3.css.map",
+    "main.f09fb8fc.js.map": "/redberry-form/static/js/main.f09fb8fc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ff3996a3.css",
+    "static/js/main.f09fb8fc.js"
+  ]
+}
