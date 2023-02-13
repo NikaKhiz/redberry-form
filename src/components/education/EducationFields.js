@@ -70,6 +70,7 @@ const EducationFields = () => {
     }
     setEducations([...educations]);
     sessionStorage.setItem("educations", JSON.stringify(educations));
+    sessionStorage.setItem("eduError", JSON.stringify(educationsError));
   }, [education]);
 
   return (

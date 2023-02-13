@@ -142,9 +142,8 @@ export const GlobalStyles = createGlobalStyle`
               textarea.error ~.warning {
                 display: block;
               }
-              input.success,textarea{
+              input.success,textarea.success{
                 border: 1px solid var(--clr-primary-green);
-
               }
               textarea.success ~.ready {
                 display: block;

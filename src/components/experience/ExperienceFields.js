@@ -70,6 +70,7 @@ const ExperienceFields = () => {
     }
     setExperiences([...experiences]);
     sessionStorage.setItem("experiences", JSON.stringify(experiences));
+    sessionStorage.setItem("expError", JSON.stringify(experiencesError));
   }, [experience]);
   return (
     <>

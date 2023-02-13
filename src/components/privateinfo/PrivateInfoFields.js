@@ -12,18 +12,8 @@ const PrivateInfoFields = () => {
     privateInfoError,
     setPrivateInfoError,
   } = useGlobalContext();
-  const {
-    nameError,
-    nameSuccess,
-    surnameSuccess,
-    surnameError,
-    imageSuccess,
-    imageError,
-    emailSuccess,
-    emailError,
-    phoneError,
-    phoneSuccess,
-  } = privateInfoError;
+  const { nameError, surnameError, imageError, emailError, phoneError } =
+    privateInfoError;
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -85,9 +75,9 @@ const PrivateInfoFields = () => {
     }
     setPrivateInfo({ ...privateInfo, [name]: value });
   };
-
   useEffect(() => {
     sessionStorage.setItem("personal", JSON.stringify(privateInfo));
+    sessionStorage.setItem("privError", JSON.stringify(privateInfoError));
   });
   return (
     <>

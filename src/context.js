@@ -4,19 +4,34 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const sessionStorage = window.sessionStorage;
+  const [gottenData, setGottenData] = useState({});
   const [shouldReplace, setShouldReplace] = useState(false);
-  const [privateInfoError, setPrivateInfoError] = useState({
-    nameError: true,
-    surnameError: true,
-    imageError: true,
-    phoneError: true,
-    emailError: true,
-  });
+  const getPrivateinfoError = () => {
+    const errorsInfo = JSON.parse(sessionStorage.getItem("privError"));
+    if (errorsInfo) {
+      return errorsInfo;
+    } else {
+      return {
+        nameError: true,
+        surnameError: true,
+        imageError: true,
+        phoneError: true,
+        emailError: true,
+      };
+    }
+  };
+  const [privateInfoError, setPrivateInfoError] = useState(
+    getPrivateinfoError()
+  );
 
   const getPageInfo = () => {
     const pageInfo = parseInt(sessionStorage.getItem("page"));
     if (pageInfo) {
-      return pageInfo;
+      if (pageInfo === 4) {
+        return 0;
+      } else {
+        return pageInfo;
+      }
     } else {
       return 0;
     }
@@ -40,14 +55,21 @@ const AppProvider = ({ children }) => {
     }
   };
   const [privateInfo, setPrivateInfo] = useState(setPersonalInfo());
-
-  const [experiencesError, setExperiencesError] = useState({
-    positionError: true,
-    employerError: true,
-    startError: true,
-    endError: true,
-    descriptionError: true,
-  });
+  const getExpError = () => {
+    const expError = JSON.parse(sessionStorage.getItem("expError"));
+    if (expError) {
+      return expError;
+    } else {
+      return {
+        positionError: true,
+        employerError: true,
+        startError: true,
+        endError: true,
+        descriptionError: true,
+      };
+    }
+  };
+  const [experiencesError, setExperiencesError] = useState(getExpError());
   const getSavedExperiences = () => {
     const savedExperiences = sessionStorage.getItem("experiences");
     if (savedExperiences) {
@@ -90,11 +112,19 @@ const AppProvider = ({ children }) => {
       ];
     }
   };
-  const [educationsError, setEducationsError] = useState({
-    instituteError: true,
-    dueDateError: true,
-    descrError: true,
-  });
+  const getEduError = () => {
+    const eduError = JSON.parse(sessionStorage.getItem("eduError"));
+    if (eduError) {
+      return eduError;
+    } else {
+      return {
+        instituteError: true,
+        dueDateError: true,
+        descrError: true,
+      };
+    }
+  };
+  const [educationsError, setEducationsError] = useState(getEduError());
   const [educations, setEducations] = useState(getSavedEducations());
   const [education, setEducation] = useState({
     index: 0,
@@ -152,7 +182,6 @@ const AppProvider = ({ children }) => {
       startError,
       descriptionError,
     } = experiencesError;
-    const { instituteError, dueDateError, descrError } = educationsError;
     page === 0 &&
       setPage((prevState) => {
         return prevState + 1;
@@ -177,17 +206,10 @@ const AppProvider = ({ children }) => {
       setPage((prevState) => {
         return prevState + 1;
       });
-    !dueDateError &&
-      !instituteError &&
-      !descrError &&
-      page === 3 &&
-      setPage((prevState) => {
-        return prevState + 1;
-      });
   };
   const prevPage = () => {
     setPage((prevState) => {
-      return prevState + 1;
+      return prevState - 1;
     });
   };
   const resetForm = () => {
@@ -250,11 +272,11 @@ const AppProvider = ({ children }) => {
       dueDateError: true,
       descrError: true,
     });
+    setGottenData({});
     setPage(0);
   };
-  const [test, setTest] = useState([]);
-  const cvsUrl = "https://resume.redberryinternship.ge/api/cvs";
 
+  const cvsUrl = "https://resume.redberryinternship.ge/api/cvs";
   function dataURLtoFile(dataurl, filename) {
     let arr = dataurl.split(","),
       mime = arr[0].match(/:(.*?);/)[1],
@@ -265,14 +287,15 @@ const AppProvider = ({ children }) => {
     while (n--) {
       u8arr[n] = bstr.charCodeAt(n);
     }
-
     return new File([u8arr], filename, { type: mime });
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { instituteError, dueDateError, descrError } = educationsError;
     let file = dataURLtoFile(privateInfo.imageBase, "image.png");
     let dataToSend = {
+      about_me: privateInfo.about_me,
       name: privateInfo.name,
       surname: privateInfo.surname,
       email: privateInfo.email,
@@ -281,76 +304,81 @@ const AppProvider = ({ children }) => {
       experiences: [...experiences],
       educations: [...educations],
     };
+
     try {
       const resp = await axios.post(cvsUrl, dataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(await resp.data);
+      const data = await resp.data;
+      if (data) {
+        setGottenData(data);
+        setPrivateInfo({
+          name: "",
+          surname: "",
+          image: "",
+          about_me: "",
+          email: "",
+          phone_number: "",
+        });
+        setExperiences([
+          {
+            position: "",
+            employer: "",
+            start_date: "",
+            due_date: "",
+            description: "",
+          },
+        ]);
+        setExperience({
+          index: 0,
+          position: "",
+          employer: "",
+          start_date: "",
+          due_date: "",
+          description: "",
+        });
+        setEducations([
+          {
+            institute: "",
+            degree: "",
+            due_date: "",
+            description: "",
+          },
+        ]);
+        setEducation({
+          index: 0,
+          institute: "",
+          degree: "",
+          due_date: "",
+          description: "",
+        });
+        setPrivateInfoError({
+          nameError: true,
+          surnameError: true,
+          imageError: true,
+          phoneError: true,
+          emailError: true,
+        });
+        setExperiencesError({
+          positionError: true,
+          employerError: true,
+          startError: true,
+          endError: true,
+          descriptionError: true,
+        });
+        setEducationsError({
+          instituteError: true,
+          dueDateError: true,
+          descrError: true,
+        });
+        setPage(4);
+      }
     } catch (error) {
+      setPage(page);
       console.log(error.response);
     }
-    setPrivateInfo({
-      name: "",
-      surname: "",
-      image: "",
-      about_me: "",
-      email: "",
-      phone_number: "",
-    });
-    setExperiences([
-      {
-        position: "",
-        employer: "",
-        start_date: "",
-        due_date: "",
-        description: "",
-      },
-    ]);
-    setExperience({
-      index: 0,
-      position: "",
-      employer: "",
-      start_date: "",
-      due_date: "",
-      description: "",
-    });
-    setEducations([
-      {
-        institute: "",
-        degree: "",
-        due_date: "",
-        description: "",
-      },
-    ]);
-    setEducation({
-      index: 0,
-      institute: "",
-      degree: "",
-      due_date: "",
-      description: "",
-    });
-    setPrivateInfoError({
-      nameError: true,
-      surnameError: true,
-      imageError: true,
-      phoneError: true,
-      emailError: true,
-    });
-    setExperiencesError({
-      positionError: true,
-      employerError: true,
-      startError: true,
-      endError: true,
-      descriptionError: true,
-    });
-    setEducationsError({
-      instituteError: true,
-      dueDateError: true,
-      descrError: true,
-    });
-    setPage(4);
   };
   const degreesUrl = "https://resume.redberryinternship.ge/api/degrees";
   const [degrees, setDegrees] = useState([]);
@@ -392,6 +420,7 @@ const AppProvider = ({ children }) => {
         setExperiencesError,
         educationsError,
         setEducationsError,
+        gottenData,
       }}
     >
       {children}
